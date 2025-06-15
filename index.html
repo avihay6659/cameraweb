@@ -16,6 +16,99 @@
             line-height: 1.6;
             color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding-top: 80px;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 10px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo::before {
+            content: "📷";
+            margin-left: 10px;
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .nav-links li a:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-cta {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white !important;
+            padding: 12px 25px !important;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(45deg, #5a67d8, #6b46c1) !important;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
         }
 
         .container {
@@ -113,22 +206,22 @@
         }
 
         .features-list li {
-            padding: 12px 0;
+            padding: 15px 50px 15px 20px;
             font-size: 1.1rem;
-            position: relative;
-            padding-right: 30px;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             margin-bottom: 8px;
             border-radius: 8px;
-            padding: 15px 20px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             border-right: 4px solid #27ae60;
+            position: relative;
         }
 
         .features-list li:before {
             content: "✓";
             position: absolute;
             right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
             color: #27ae60;
             font-weight: bold;
             font-size: 1.2rem;
@@ -326,22 +419,256 @@
 
         /* About Section */
         .about-section {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
+            background: white;
+            color: #333;
             padding: 80px 0;
             text-align: center;
         }
 
         .about-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
         }
 
-        .about-section p {
+        .about-intro {
+            max-width: 600px;
+            margin: 0 auto 60px auto;
+        }
+
+        .about-intro p {
+            font-size: 1.3rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .about-item {
+            background: #f8f9fa;
+            padding: 40px 30px;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .about-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .about-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .about-item h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .about-item p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .about-cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 40px;
+            border-radius: 20px;
+            margin-top: 60px;
+        }
+
+        .about-cta h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .about-cta p {
             font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
+            margin-bottom: 30px;
             opacity: 0.9;
+        }
+
+        .about-btn {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .about-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Pricing Calculator */
+        .pricing-calculator {
+            margin-top: 30px;
+        }
+
+        .rental-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .rental-option {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .rental-option:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .rental-option.popular {
+            border-color: #27ae60;
+            background: linear-gradient(135deg, #f8fff8 0%, #e8f5e8 100%);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: #27ae60;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .option-header {
+            margin-bottom: 15px;
+        }
+
+        .option-header h5 {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .option-header .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .rental-option p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .rental-option ul {
+            list-style: none;
+            padding: 0;
+            text-align: right;
+        }
+
+        .rental-option li {
+            padding: 5px 0;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .rental-option li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .calculator-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .calc-inputs {
+            display: grid;
+            gap: 15px;
+        }
+
+        .calc-inputs label {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .calc-inputs select,
+        .calc-inputs input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .calc-inputs select:focus,
+        .calc-inputs input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .total-price {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .total-price span:last-child {
+            color: #27ae60;
+            font-size: 1.5rem;
+        }
+
+        .calc-cta {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .calc-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
         }
 
         /* Accessibility Button */
@@ -370,6 +697,35 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .logo::before {
+                font-size: 1.3rem;
+                margin-left: 8px;
+            }
+
             .hero {
                 background-attachment: scroll;
                 background-position: center top;
@@ -533,16 +889,24 @@
 
             .features-list li {
                 font-size: 0.95rem;
-                padding: 10px 12px;
+                padding: 12px 40px 12px 15px;
                 margin-bottom: 5px;
                 background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
                 border-radius: 5px;
                 box-shadow: 0 1px 3px rgba(0,0,0,0.1);
                 border-right: 3px solid #27ae60;
+                text-align: right;
+                position: relative;
             }
 
             .features-list li:before {
-                right: 10px;
+                content: "✓";
+                position: absolute;
+                right: 12px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #27ae60;
+                font-weight: bold;
                 font-size: 1rem;
             }
 
@@ -561,30 +925,62 @@
 
             .info-content {
                 padding: 15px;
+                text-align: center;
             }
 
             .info-content h3 {
                 font-size: 1.3rem;
+                margin-bottom: 15px;
+                text-align: center;
             }
 
             .info-content h4 {
                 font-size: 1.1rem;
+                margin-bottom: 10px;
+                text-align: center;
+                color: #667eea;
+                background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+                padding: 8px 15px;
+                border-radius: 20px;
+                margin: 15px 0 10px 0;
             }
 
             .info-content p {
                 font-size: 0.95rem;
+                line-height: 1.6;
+                margin-bottom: 15px;
+                text-align: right;
+                background: rgba(248, 249, 250, 0.8);
+                padding: 12px;
+                border-radius: 8px;
+                border-right: 3px solid #667eea;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">ProCam Studio</a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#camera">המצלמות</a></li>
+                <li><a href="#specs">מפרט טכני</a></li>
+                <li><a href="#availability">מבצעים</a></li>
+                <li><a href="#about">אודותינו</a></li>
+                <li><a href="order.html" class="nav-cta">השכר עכשיו</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
                 <h1>ProCam Studio</h1>
                 <p>המצלמה המקצועית החדשה שתשנה לך את חוויית הצילום לנצח. איכות בלתי מתפשרת, טכנולוgia מתקדמת ועיצוב מושלם</p>
-                <a href="#camera" class="cta-button">השכר עכשיו!</a>
+                                    <a href="#camera" class="cta-button">השכר עכשיו!</a>
             </div>
         </div>
     </section>
@@ -611,11 +1007,11 @@
                     
                     <div class="price-section">
                         <span class="sale-badge">מבצע מיוחד!</span>
-                        <span class="new-price">₪2,250</span>
-                        <span class="old-price">₪2,500</span>
+                        <span class="new-price">₪250/יום</span>
+                        <span class="old-price">₪300/יום</span>
                     </div>
                     
-                    <a href="#order" class="cta-button">הזמן עכשיו</a>
+                    <a href="order.html" class="cta-button">הזמן עכשיו</a>
                 </div>
             </div>
         </div>
@@ -628,7 +1024,7 @@
                 <button class="tab-btn active" onclick="openTab(event, 'general-info')">מידע כללי</button>
                 <button class="tab-btn" onclick="openTab(event, 'specs')">מאפיינים טכניים</button>
                 <button class="tab-btn" onclick="openTab(event, 'accessories')">מוצרים נלווים</button>
-                <button class="tab-btn" onclick="openTab(event, 'availability')">זמינות</button>
+                <button class="tab-btn" onclick="openTab(event, 'availability')">מבצעים</button>
             </div>
 
             <div id="general-info" class="tab-content active">
@@ -667,29 +1063,87 @@
                 <div class="info-content">
                     <h3>מוצרים נלווים ואביזרים</h3>
                     
-                    <h4>מה כלול בקופסה</h4>
-                    <p>עם רכישת המצלמה תקבלו את מצלמת Canon G7X Mark III, סוללה NB-13L, מטען סוללה CB-2LH, כבל USB מסוג USB-A ל-USB-C, רצועת יד איכותית ומדריך למשתמש מפורט.</p>
+                    <h4>מה כלול בהשכרה</h4>
+                    <p>עם השכרת המצלמה תקבלו את מצלמת Canon G7X Mark III, סוללה NB-13L, מטען סוללה CB-2LH, כבל USB מסוג USB-A ל-USB-C, רצועת יד איכותית ומדריך למשתמש מפורט.</p>
                     
-                    <h4>אביזרים מומלצים</h4>
-                    <p>למקסום הפוטנציאל של המצלמה, אנו ממליצים על כרטיס זיכרון SanDisk 64GB לאחסון מהיר, תיק נשיאה מקורי של Canon להגנה מושלמת, סוללה נוספת NB-13L לימי צילום ארוכים, חצובה קלה לנסיעות ומסנן UV להגנה על העדשה.</p>
+                    <h4>אביזרים נוספים להשכרה</h4>
+                    <p>למקסום הפוטנציאל של המצלמה, אנו מציעים להשכרה כרטיס זיכרון SanDisk 64GB לאחסון מהיר, תיק נשיאה מקורי של Canon להגנה מושלמת, סוללה נוספת NB-13L לימי צילום ארוכים, חצובה קלה לנסיעות ומסנן UV להגנה על העדשה.</p>
                     
                     <h4>אביזרים מתקדמים</h4>
-                    <p>עבור צרכים מתקדמים יותר, ניתן להוסיף מיקרופון חיצוני לשיפור איכות הקול בסרטונים, תאורת LED קטנה לצילום בתאורה חלשה, גריפ יד נוסף לאחיזה משופרת, מסנני צבע יצירתיים לאפקטים מיוחדים וכיסוי עמיד למים לצילום בתנאי מזג אוויר קשים.</p>
+                    <p>עבור צרכים מתקדמים יותר, ניתן להוסיף להשכרה מיקרופון חיצוני לשיפור איכות הקול בסרטונים, תאורת LED קטנה לצילום בתאורה חלשה, גריפ יד נוסף לאחיזה משופרת, מסנני צבע יצירתיים לאפקטים מיוחדים וכיסוי עמיד למים לצילום בתנאי מזג אוויר קשים.</p>
                 </div>
             </div>
 
             <div id="availability" class="tab-content">
                 <div class="info-content">
-                    <h3>זמינות ושירות</h3>
+                    <h3>מבצעים מיוחדים</h3>
                     
-                    <h4>זמינות במלאי</h4>
-                    <p>אנו שמחים להודיע שהמצלמה זמינה במלאי מלא עם יותר מ-50 יחידות במלאי ומוכנה למשלוח מיידי. אנו מבטיחים משלוח מהיר תוך 24-48 שעות לכל רחבי הארץ, וכמובן גם אפשרות לאיסוף עצמי מיידי מהחנות שלנו.</p>
-                    
-                    <h4>אחריות ושירות</h4>
-                    <p><span class="highlight">אחריות יצרן מלאה למשך 2 שנים</span> כוללת שירות טכני בעברית וללא עלות נוספת. יש לנו מרכזי שירות בכל רחבי הארץ, שירות החלפה זמנית במקרה של תקלה, וזכות החזרה מלאה למשך 14 יום ללא שאלות.</p>
-                    
-                    <h4>אפשרויות תשלום גמישות</h4>
-                    <p>אנו מציעים מגוון אפשרויות תשלום נוחות: תשלום מזומן או כרטיס אשראי, תשלומים נוחים עד 12 תשלומים ללא ריבית, ביט ופייבוקס, העברה בנקאית, וכמובן מימון 0% ללקוחות מאושרים שעומדים בקריטריונים.</p>
+                    <div class="pricing-calculator">
+                        <h4>בחר תקופת השכרה</h4>
+                        <div class="rental-options">
+                            <div class="rental-option" onclick="selectRental('daily', 250)">
+                                <div class="option-header">
+                                    <h5>השכרה יומית</h5>
+                                    <span class="price">₪250/יום</span>
+                                </div>
+                                <p>מושלם לאירועים חד פעמיים</p>
+                                <ul>
+                                    <li>מינימום יום אחד</li>
+                                    <li>איסוף והחזרה ביום אחד</li>
+                                    <li>מתאים לצילומי אירועים</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="rental-option popular" onclick="selectRental('weekly', 200)">
+                                <div class="popular-badge">הכי פופולרי!</div>
+                                <div class="option-header">
+                                    <h5>השכרה שבועית</h5>
+                                    <span class="price">₪200/יום</span>
+                                </div>
+                                <p>חסכון של 20% - מומלץ!</p>
+                                <ul>
+                                    <li>מינימום שבוע (7 ימים)</li>
+                                    <li>גמישות בתאריכים</li>
+                                    <li>מתאים לפרויקטים ארוכים</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="rental-option" onclick="selectRental('monthly', 150)">
+                                <div class="option-header">
+                                    <h5>השכרה חודשית</h5>
+                                    <span class="price">₪150/יום</span>
+                                </div>
+                                <p>החיסכון הגדול ביותר - 40%!</p>
+                                <ul>
+                                    <li>מינימום חודש (30 ימים)</li>
+                                    <li>אחזקה וטיפול כלולים</li>
+                                    <li>מתאים למקצוענים</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="calculator-section">
+                            <h4>חשבון מהיר</h4>
+                            <div class="calc-inputs">
+                                <label>בחר סוג השכרה:</label>
+                                <select id="rentalType" onchange="calculatePrice()">
+                                    <option value="250">יומי - ₪250/יום</option>
+                                    <option value="200">שבועי - ₪200/יום</option>
+                                    <option value="150">חודשי - ₪150/יום</option>
+                                </select>
+                                
+                                <label>כמה ימים?</label>
+                                <input type="number" id="days" min="1" value="1" onchange="calculatePrice()" />
+                                
+                                <div class="total-price">
+                                    <span>סה"כ לתשלום: </span>
+                                    <span id="totalPrice">₪250</span>
+                                </div>
+                                
+                                <button class="calc-cta" onclick="window.location.href='order.html'">השכר עכשיו</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -699,7 +1153,35 @@
     <section class="about-section">
         <div class="container">
             <h2>אודות ProCam Studio</h2>
-            <p>אנחנו מובילים בתחום הצילום המקצועי כבר למעלה מ-15 שנה. המטרה שלנו היא להביא לכל צלם, מתחיל ומקצועי, את הכלים הטובים ביותר לביטוי יצירתי מושלם. המצלמות שלנו נבחרות בקפידה ועוברות בדיקות איכות מחמירות כדי להבטיח לכם חוויית צילום בלתי נשכחת.</p>
+            <div class="about-intro">
+                <p>החברה שלנו מתמחה בהשכרת מצלמות מקצועיות ומובילה בתחום כבר למעלה מ-8 שנים</p>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-item">
+                    <div class="about-icon">📸</div>
+                    <h3>מומחיות בציוד</h3>
+                    <p>אנחנו בוחרים בקפידה את הציוד הטוב ביותר מהמותגים המובילים בעולם. כל מצלמה עוברת בדיקות איכות מחמירות לפני כל השכרה.</p>
+                </div>
+                
+                <div class="about-item">
+                    <div class="about-icon">⚡</div>
+                    <h3>שירות מהיר</h3>
+                    <p>משלוח מהיר תוך 24 שעות, איסוף עצמי מיידי, ותמיכה טכנית זמינה בכל שעות היום. אנחנו כאן בשבילכם.</p>
+                </div>
+                
+                <div class="about-item">
+                    <div class="about-icon">💎</div>
+                    <h3>איכות ללא פשרות</h3>
+                    <p>המטרה שלנו היא להביא לכל צלם, מתחיל ומקצועי, את הכלים הטובים ביותר לביטוי יצירתי מושלם.</p>
+                </div>
+            </div>
+            
+            <div class="about-cta">
+                <h3>רוצים לדעת עוד?</h3>
+                <p>נשמח לעזור לכם לבחור את הציוד המתאים ביותר לפרויקט שלכם</p>
+                <a href="#camera" class="about-btn">התחילו עכשיו</a>
+            </div>
         </div>
     </section>
 
@@ -709,6 +1191,50 @@
     </button>
 
     <script>
+        // Pricing calculator functions
+        function selectRental(type, price) {
+            const select = document.getElementById('rentalType');
+            select.value = price;
+            
+            // Update minimum days based on type
+            const daysInput = document.getElementById('days');
+            if (type === 'weekly') {
+                daysInput.min = 7;
+                if (daysInput.value < 7) daysInput.value = 7;
+            } else if (type === 'monthly') {
+                daysInput.min = 30;
+                if (daysInput.value < 30) daysInput.value = 30;
+            } else {
+                daysInput.min = 1;
+            }
+            
+            calculatePrice();
+        }
+
+        function calculatePrice() {
+            const pricePerDay = parseInt(document.getElementById('rentalType').value);
+            const days = parseInt(document.getElementById('days').value) || 1;
+            const total = pricePerDay * days;
+            
+            document.getElementById('totalPrice').textContent = `₪${total.toLocaleString()}`;
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
         // Tabs functionality
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;
