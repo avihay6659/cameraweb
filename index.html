@@ -364,6 +364,13 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .hero {
+                background-attachment: scroll;
+                background-position: center center;
+                background-size: cover;
+                min-height: 100vh;
+            }
+
             .hero-content h1 {
                 font-size: 2.5rem;
             }
@@ -408,6 +415,12 @@
         }
 
         @media (max-width: 480px) {
+            .hero {
+                background-position: center center;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+
             .hero-content h1 {
                 font-size: 2rem;
             }
@@ -443,7 +456,7 @@
         <div class="container">
             <div class="camera-content">
                 <div class="camera-image">
-                    <img src="https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="מצלמה מקצועית" />
+                    <img src="photo.jpg" alt="מצלמה מקצועית" />
                 </div>
                 <div class="camera-info">
                     <h2>Canon PowerShot G7X Mark III</h2>
