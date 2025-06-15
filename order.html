@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProCam Studio - השכרת מצלמה</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .order-form {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .form-section {
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: "";
+            width: 4px;
+            height: 30px;
+            background: #667eea;
+            margin-left: 15px;
+            border-radius: 2px;
+        }
+
+        /* Date Selector Preview */
+        .date-selector-preview {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            color: white;
+        }
+
+        .date-preview-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .date-icon {
+            font-size: 3rem;
+            opacity: 0.9;
+        }
+
+        .date-text {
+            flex: 1;
+        }
+
+        .date-text h4 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .date-text p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .open-calendar-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .open-calendar-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Selected Dates Display */
+        .selected-dates-display {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 20px;
+            align-items: center;
+            color: white;
+        }
+
+        .selected-date-item {
+            text-align: center;
+        }
+
+        .date-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .date-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .date-value.total-days {
+            font-size: 1.5rem;
+            color: #fff200;
+        }
+
+        .change-dates-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .change-dates-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Calendar Actions */
+        .calendar-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .calendar-action-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .confirm-btn {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+        }
+
+        .confirm-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+        }
+
+        .confirm-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .cancel-btn {
+            background: #6c757d;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        /* Calendar Instructions */
+        .calendar-instructions {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-right: 4px solid #667eea;
+        }
+
+        .calendar-instructions p {
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .calendar-instructions ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .calendar-instructions li {
+            padding: 5px 0;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* Calendar Styles */
+        .calendar-container {
+            margin: 20px 0;
+        }
+
+        .calendar {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-nav {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .calendar-nav:hover {
+            background: #5a67d8;
+        }
+
+        .calendar-month {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+
+        .calendar-day {
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: white;
+            border: 2px solid transparent;
+        }
+
+        .calendar-day:hover {
+            background: #e3f2fd;
+        }
+
+        .calendar-day.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+            background: #f5f5f5;
+        }
+
+        .calendar-day.selected-start {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .calendar-day.selected-end {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+
+        .calendar-day.in-range {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(39, 174, 96, 0.2) 100%);
+            border-color: #667eea;
+        }
+
+        .weekday-header {
+            font-weight: 600;
+            color: #666;
+            text-align: center;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+        }
+
+        /* Date Selection Summary */
+        .date-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .date-summary h4 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .date-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .date-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        /* Rental Options */
+        .rental-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .rental-option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .rental-option:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .rental-option.recommended {
+            border-color: #ff6b6b !important;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(238, 90, 36, 0.1) 100%) !important;
+            position: relative;
+            animation: pulse-recommend 2s infinite;
+        }
+
+        .recommendation-badge {
+            position: absolute;
+            top: -10px;
+            right: -5px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(255, 107, 107, 0.4);
+            z-index: 1;
+        }
+
+        @keyframes pulse-recommend {
+            0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+        }
+
+        .rental-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        /* Form Inputs */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .payment-method {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .payment-method:hover {
+            border-color: #667eea;
+        }
+
+        .payment-method.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+
+        .payment-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .payment-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Price Summary */
+        .price-summary {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .price-total {
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
+            padding-top: 15px;
+            margin-top: 15px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Back Button */
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px 10px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+                line-height: 1.3;
+            }
+
+            .header p {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+
+            .form-section {
+                padding: 25px 15px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .date-preview-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+                padding: 20px 15px;
+            }
+
+            .date-text h4 {
+                font-size: 1.2rem;
+            }
+
+            .date-text p {
+                font-size: 0.9rem;
+            }
+
+            .open-calendar-btn {
+                width: 100%;
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+
+            .selected-dates-display {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                text-align: center;
+                padding: 20px 15px;
+            }
+
+            .date-value {
+                font-size: 1.1rem;
+            }
+
+            .change-dates-btn {
+                width: 100%;
+                padding: 12px 20px;
+                margin-top: 10px;
+            }
+
+            .calendar {
+                padding: 15px;
+            }
+
+            .calendar-header {
+                margin-bottom: 15px;
+            }
+
+            .calendar-month {
+                font-size: 1.1rem;
+            }
+
+            .calendar-nav {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+
+            .calendar-grid {
+                font-size: 0.85rem;
+                gap: 3px;
+            }
+
+            .calendar-day {
+                padding: 8px 4px;
+                font-size: 0.85rem;
+            }
+
+            .weekday-header {
+                padding: 8px 4px;
+                font-size: 0.8rem;
+            }
+
+            .calendar-instructions {
+                padding: 12px;
+                margin-bottom: 15px;
+            }
+
+            .calendar-instructions p {
+                font-size: 0.9rem;
+                margin-bottom: 8px;
+            }
+
+            .calendar-instructions li {
+                font-size: 0.85rem;
+                padding: 3px 0;
+            }
+
+            .calendar-actions {
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 15px;
+            }
+
+            .calendar-action-btn {
+                width: 100%;
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+
+            .rental-options {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin: 15px 0;
+            }
+
+            .rental-option {
+                padding: 20px 15px;
+                margin: 0 5px;
+            }
+
+            .rental-price {
+                font-size: 1.6rem;
+            }
+
+            .payment-methods {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                margin: 15px 0;
+            }
+
+            .payment-method {
+                padding: 15px 10px;
+                text-align: center;
+            }
+
+            .payment-icon {
+                font-size: 1.5rem;
+            }
+
+            .payment-name {
+                font-size: 0.9rem;
+            }
+
+            .price-summary {
+                padding: 20px 15px;
+                margin: 20px 0;
+            }
+
+            .price-row {
+                font-size: 1rem;
+                margin-bottom: 8px;
+            }
+
+            .price-total {
+                font-size: 1.3rem;
+                padding-top: 12px;
+                margin-top: 12px;
+            }
+
+            .submit-btn {
+                padding: 16px 30px;
+                font-size: 1.1rem;
+                margin-top: 15px;
+            }
+
+            .back-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                margin-bottom: 20px;
+            }
+
+            .form-group label {
+                font-size: 0.95rem;
+                margin-bottom: 6px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 14px 12px;
+                font-size: 1rem;
+                border-width: 1px;
+            }
+
+            .date-icon {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px 5px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+                margin-bottom: 8px;
+            }
+
+            .header p {
+                font-size: 0.9rem;
+                padding: 0 5px;
+            }
+
+            .form-section {
+                padding: 20px 10px;
+                margin-bottom: 15px;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+                margin-bottom: 12px;
+            }
+
+            .section-title::before {
+                width: 3px;
+                height: 25px;
+                margin-left: 10px;
+            }
+
+            .date-preview-content {
+                padding: 15px 10px;
+                gap: 12px;
+            }
+
+            .date-text h4 {
+                font-size: 1.1rem;
+            }
+
+            .date-text p {
+                font-size: 0.85rem;
+            }
+
+            .open-calendar-btn {
+                padding: 12px 16px;
+                font-size: 0.9rem;
+            }
+
+            .selected-dates-display {
+                padding: 15px 10px;
+                gap: 12px;
+            }
+
+            .date-label {
+                font-size: 0.8rem;
+            }
+
+            .date-value {
+                font-size: 1rem;
+            }
+
+            .change-dates-btn {
+                padding: 10px 16px;
+                font-size: 0.85rem;
+            }
+
+            .calendar {
+                padding: 10px;
+            }
+
+            .calendar-month {
+                font-size: 1rem;
+            }
+
+            .calendar-nav {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+
+            .calendar-grid {
+                font-size: 0.8rem;
+                gap: 2px;
+            }
+
+            .calendar-day {
+                padding: 6px 2px;
+                font-size: 0.8rem;
+            }
+
+            .weekday-header {
+                padding: 6px 2px;
+                font-size: 0.75rem;
+            }
+
+            .calendar-instructions {
+                padding: 10px;
+                margin-bottom: 12px;
+            }
+
+            .calendar-instructions p {
+                font-size: 0.85rem;
+                margin-bottom: 6px;
+            }
+
+            .calendar-instructions li {
+                font-size: 0.8rem;
+                padding: 2px 0;
+            }
+
+            .calendar-action-btn {
+                padding: 12px 16px;
+                font-size: 0.9rem;
+            }
+
+            .rental-option {
+                padding: 15px 10px;
+                margin: 0 2px;
+            }
+
+            .rental-price {
+                font-size: 1.4rem;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .payment-method {
+                padding: 12px 8px;
+            }
+
+            .payment-icon {
+                font-size: 1.3rem;
+            }
+
+            .payment-name {
+                font-size: 0.85rem;
+            }
+
+            .price-summary {
+                padding: 15px 10px;
+                margin: 15px 0;
+            }
+
+            .price-row {
+                font-size: 0.9rem;
+                margin-bottom: 6px;
+            }
+
+            .price-total {
+                font-size: 1.2rem;
+                padding-top: 10px;
+                margin-top: 10px;
+            }
+
+            .submit-btn {
+                padding: 14px 25px;
+                font-size: 1rem;
+                margin-top: 12px;
+            }
+
+            .back-btn {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+                margin-bottom: 15px;
+            }
+
+            .form-group label {
+                font-size: 0.9rem;
+                margin-bottom: 5px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 12px 10px;
+                font-size: 0.9rem;
+            }
+
+            .date-icon {
+                font-size: 2rem;
+            }
+
+            .recommendation-badge {
+                font-size: 0.7rem;
+                padding: 4px 8px;
+                top: -8px;
+                right: -3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← חזרה לאתר</a>
+        
+        <div class="header">
+            <h1>השכרת Canon PowerShot G7X Mark III</h1>
+            <p>מלא את הפרטים להשכרה ובחר את התאריכים המתאימים לך</p>
+        </div>
+
+        <form class="order-form" id="orderForm">
+            <!-- Date Selection Section -->
+            <div class="form-section">
+                <h3 class="section-title">בחירת תאריכים</h3>
+                
+                <!-- Date Selection Button -->
+                <div class="date-selector-preview" id="dateSelectorPreview">
+                    <div class="date-preview-content">
+                        <div class="date-icon">📅</div>
+                        <div class="date-text">
+                            <h4>בחר תאריכי השכרה</h4>
+                            <p>לחץ לפתיחת לוח השנה ובחירת התאריכים</p>
+                        </div>
+                        <button type="button" class="open-calendar-btn" onclick="toggleCalendar()">
+                            בחר תאריכים
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Selected Dates Display -->
+                <div class="selected-dates-display" id="selectedDatesDisplay" style="display: none;">
+                    <div class="selected-date-item">
+                        <div class="date-label">תאריך התחלה</div>
+                        <div class="date-value" id="startDateValue">לא נבחר</div>
+                    </div>
+                    <div class="selected-date-item">
+                        <div class="date-label">תאריך סיום</div>
+                        <div class="date-value" id="endDateValue">לא נבחר</div>
+                    </div>
+                    <div class="selected-date-item">
+                        <div class="date-label">סה"כ ימים</div>
+                        <div class="date-value total-days" id="totalDaysValue">0</div>
+                    </div>
+                    <button type="button" class="change-dates-btn" onclick="toggleCalendar()">
+                        שנה תאריכים
+                    </button>
+                </div>
+                
+                <!-- Calendar Container (Initially Hidden) -->
+                <div class="calendar-container" id="calendarContainer" style="display: none;">
+                    <div class="calendar-instructions">
+                        <p><strong>איך לבחור תאריכים:</strong></p>
+                        <ul>
+                            <li>📅 <strong>יום בודד:</strong> לחץ פעמיים על אותו תאריך</li>
+                            <li>📆 <strong>מספר ימים:</strong> לחץ על תאריך התחלה ואז על תאריך סיום</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <button type="button" class="calendar-nav" onclick="previousMonth()">‹</button>
+                            <div class="calendar-month" id="currentMonth"></div>
+                            <button type="button" class="calendar-nav" onclick="nextMonth()">›</button>
+                        </div>
+                        <div class="calendar-grid" id="calendarGrid"></div>
+                    </div>
+                    
+                    <div class="calendar-actions">
+                        <button type="button" class="calendar-action-btn confirm-btn" onclick="confirmDates()" id="confirmBtn" disabled>
+                            אשר תאריכים
+                        </button>
+                        <button type="button" class="calendar-action-btn cancel-btn" onclick="cancelDateSelection()">
+                            ביטול
+                        </button>
+                    </div>
+                </div>
+
+                <div class="date-summary" id="dateSummary" style="display: none;">
+                    <h4>תאריכים נבחרים</h4>
+                    <div class="date-info">
+                        <div class="date-item">
+                            <strong>תאריך התחלה:</strong><br>
+                            <span id="startDateDisplay">לא נבחר</span>
+                        </div>
+                        <div class="date-item">
+                            <strong>תאריך סיום:</strong><br>
+                            <span id="endDateDisplay">לא נבחר</span>
+                        </div>
+                        <div class="date-item">
+                            <strong>סה"כ ימים:</strong><br>
+                            <span id="totalDaysDisplay">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rental Type Section -->
+            <div class="form-section">
+                <h3 class="section-title">סוג השכרה</h3>
+                <div class="rental-options">
+                    <div class="rental-option" onclick="selectRentalType('daily', 250)">
+                        <div class="rental-price">₪250/יום</div>
+                        <div><strong>השכרה יומית</strong></div>
+                        <div>מתאים לאירועים קצרים</div>
+                    </div>
+                    <div class="rental-option selected" onclick="selectRentalType('weekly', 200)">
+                        <div class="rental-price">₪200/יום</div>
+                        <div><strong>השכרה שבועית</strong></div>
+                        <div>חסכון של 20% - מומלץ!</div>
+                    </div>
+                    <div class="rental-option" onclick="selectRentalType('monthly', 150)">
+                        <div class="rental-price">₪150/יום</div>
+                        <div><strong>השכרה חודשית</strong></div>
+                        <div>החסכון הגדול ביותר</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personal Details Section -->
+            <div class="form-section">
+                <h3 class="section-title">פרטים אישיים</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>שם פרטי *</label>
+                        <input type="text" id="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>שם משפחה *</label>
+                        <input type="text" id="lastName" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>טלפון *</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>אימייל *</label>
+                        <input type="email" id="email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>כתובת</label>
+                    <textarea id="address" rows="3" placeholder="כתובת מלאה למשלוח..."></textarea>
+                </div>
+            </div>
+
+            <!-- Payment Method Section -->
+            <div class="form-section">
+                <h3 class="section-title">אמצעי תשלום</h3>
+                <div class="payment-methods">
+                    <div class="payment-method selected" onclick="selectPayment('credit')">
+                        <div class="payment-icon">💳</div>
+                        <div class="payment-name">כרטיס אשראי</div>
+                    </div>
+                    <div class="payment-method" onclick="selectPayment('paypal')">
+                        <div class="payment-icon">🅿️</div>
+                        <div class="payment-name">PayPal</div>
+                    </div>
+                    <div class="payment-method" onclick="selectPayment('bit')">
+                        <div class="payment-icon">📱</div>
+                        <div class="payment-name">Bit</div>
+                    </div>
+                    <div class="payment-method" onclick="selectPayment('bank')">
+                        <div class="payment-icon">🏦</div>
+                        <div class="payment-name">העברה בנקאית</div>
+                    </div>
+                </div>
+
+                <!-- Credit Card Details (shown when credit card is selected) -->
+                <div id="creditCardDetails" class="credit-card-section">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>מספר כרטיס *</label>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+                        </div>
+                        <div class="form-group">
+                            <label>שם בעל הכרטיס *</label>
+                            <input type="text" id="cardName">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>תוקף *</label>
+                            <input type="text" id="cardExpiry" placeholder="MM/YY">
+                        </div>
+                        <div class="form-group">
+                            <label>CVV *</label>
+                            <input type="text" id="cardCVV" placeholder="123">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Price Summary Section -->
+            <div class="form-section">
+                <h3 class="section-title">סיכום הזמנה</h3>
+                <div class="price-summary">
+                    <div class="price-row">
+                        <span>מחיר ליום:</span>
+                        <span id="pricePerDay">₪200</span>
+                    </div>
+                    <div class="price-row">
+                        <span>מספר ימים:</span>
+                        <span id="numberOfDays">0</span>
+                    </div>
+                    <div class="price-row">
+                        <span>דמי ערבות:</span>
+                        <span>₪500</span>
+                    </div>
+                    <div class="price-row price-total">
+                        <span>סה"כ לתשלום:</span>
+                        <span id="totalAmount">₪500</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn" disabled>
+                    השלם הזמנה
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let currentDate = new Date();
+        let selectedStartDate = null;
+        let selectedEndDate = null;
+        let currentRentalType = 'weekly';
+        let currentPricePerDay = 200;
+        let selectedPayment = 'credit';
+        let calendarOpen = false;
+
+        // Calendar toggle functions
+        function toggleCalendar() {
+            const container = document.getElementById('calendarContainer');
+            const preview = document.getElementById('dateSelectorPreview');
+            const display = document.getElementById('selectedDatesDisplay');
+            
+            calendarOpen = !calendarOpen;
+            
+            if (calendarOpen) {
+                container.style.display = 'block';
+                preview.style.display = 'none';
+                if (selectedStartDate && selectedEndDate) {
+                    display.style.display = 'none';
+                }
+                updateCalendarDisplay();
+            } else {
+                container.style.display = 'none';
+                if (selectedStartDate && selectedEndDate) {
+                    display.style.display = 'grid';
+                } else {
+                    preview.style.display = 'block';
+                }
+            }
+        }
+
+        function confirmDates() {
+            if (selectedStartDate && selectedEndDate) {
+                calendarOpen = false;
+                document.getElementById('calendarContainer').style.display = 'none';
+                document.getElementById('dateSelectorPreview').style.display = 'none';
+                
+                const display = document.getElementById('selectedDatesDisplay');
+                display.style.display = 'grid';
+                
+                // Update display values
+                document.getElementById('startDateValue').textContent = 
+                    selectedStartDate.toLocaleDateString('he-IL');
+                document.getElementById('endDateValue').textContent = 
+                    selectedEndDate.toLocaleDateString('he-IL');
+                
+                // Calculate days correctly - if same date, it's 1 day
+                let days;
+                if (selectedStartDate.getTime() === selectedEndDate.getTime()) {
+                    days = 1; // Single day
+                } else {
+                    days = Math.ceil((selectedEndDate - selectedStartDate) / (1000 * 60 * 60 * 24));
+                }
+                
+                document.getElementById('totalDaysValue').textContent = days;
+                
+                // Auto-suggest best rental type based on days
+                autoSuggestRentalType(days);
+                
+                updatePriceSummary();
+                updateSubmitButton();
+            }
+        }
+
+        function autoSuggestRentalType(days) {
+            // Remove all previous selections
+            document.querySelectorAll('.rental-option').forEach(option => {
+                option.classList.remove('selected', 'recommended');
+            });
+            
+            let recommendedType, recommendedPrice;
+            
+            if (days >= 30) {
+                // Monthly is best for 30+ days
+                recommendedType = 'monthly';
+                recommendedPrice = 150;
+                currentRentalType = 'monthly';
+                currentPricePerDay = 150;
+            } else if (days >= 7) {
+                // Weekly is best for 7-29 days
+                recommendedType = 'weekly';
+                recommendedPrice = 200;
+                currentRentalType = 'weekly';
+                currentPricePerDay = 200;
+            } else {
+                // Daily for 1-6 days (including single day)
+                recommendedType = 'daily';
+                recommendedPrice = 250;
+                currentRentalType = 'daily';
+                currentPricePerDay = 250;
+            }
+            
+            // Highlight the recommended option
+            const rentalOptions = document.querySelectorAll('.rental-option');
+            rentalOptions.forEach((option, index) => {
+                if ((index === 0 && recommendedType === 'daily') ||
+                    (index === 1 && recommendedType === 'weekly') ||
+                    (index === 2 && recommendedType === 'monthly')) {
+                    option.classList.add('selected', 'recommended');
+                    
+                    // Add recommendation badge if not exists
+                    if (!option.querySelector('.recommendation-badge')) {
+                        const badge = document.createElement('div');
+                        badge.className = 'recommendation-badge';
+                        badge.textContent = days === 1 ? 'מושלם ליום בודד!' : 'מומלץ עבורך!';
+                        option.appendChild(badge);
+                    }
+                } else {
+                    // Remove recommendation badge from others
+                    const badge = option.querySelector('.recommendation-badge');
+                    if (badge) badge.remove();
+                }
+            });
+            
+            // Scroll to rental options section
+            document.querySelector('.rental-options').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+        }
+
+        function cancelDateSelection() {
+            calendarOpen = false;
+            document.getElementById('calendarContainer').style.display = 'none';
+            
+            if (selectedStartDate && selectedEndDate) {
+                document.getElementById('selectedDatesDisplay').style.display = 'grid';
+            } else {
+                document.getElementById('dateSelectorPreview').style.display = 'block';
+            }
+        }
+
+        // Calendar functions
+        function initCalendar() {
+            updateCalendarDisplay();
+        }
+
+        function updateCalendarDisplay() {
+            const monthNames = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני',
+                              'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
+            
+            document.getElementById('currentMonth').textContent = 
+                `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+            
+            generateCalendarGrid();
+        }
+
+        function generateCalendarGrid() {
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = '';
+            
+            // Add weekday headers
+            const weekdays = ['ש', 'ו', 'ה', 'ד', 'ג', 'ב', 'א'];
+            weekdays.forEach(day => {
+                const header = document.createElement('div');
+                header.className = 'weekday-header';
+                header.textContent = day;
+                grid.appendChild(header);
+            });
+            
+            const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+            const today = new Date();
+            
+            // Add empty cells for days before the first day of the month
+            for (let i = 0; i < (7 - firstDay.getDay()) % 7; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'calendar-day disabled';
+                grid.appendChild(emptyCell);
+            }
+            
+            // Add days of the month
+            for (let day = 1; day <= lastDay.getDate(); day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                
+                const cellDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+                
+                // Disable past dates
+                if (cellDate < today) {
+                    dayElement.className += ' disabled';
+                } else {
+                    dayElement.onclick = () => selectDate(cellDate);
+                    
+                    // Highlight selected dates
+                    if (selectedStartDate && cellDate.getTime() === selectedStartDate.getTime()) {
+                        dayElement.className += ' selected-start';
+                    } else if (selectedEndDate && cellDate.getTime() === selectedEndDate.getTime()) {
+                        dayElement.className += ' selected-end';
+                    } else if (selectedStartDate && selectedEndDate && 
+                             cellDate > selectedStartDate && cellDate < selectedEndDate) {
+                        dayElement.className += ' in-range';
+                    }
+                }
+                
+                grid.appendChild(dayElement);
+            }
+        }
+
+        function selectDate(date) {
+            if (!selectedStartDate || (selectedStartDate && selectedEndDate)) {
+                // First selection or reset
+                selectedStartDate = date;
+                selectedEndDate = null;
+            } else if (date.getTime() === selectedStartDate.getTime()) {
+                // Same date clicked - single day rental
+                selectedEndDate = selectedStartDate; // Same day for single day rental
+            } else if (date > selectedStartDate) {
+                // Second selection
+                selectedEndDate = date;
+            } else {
+                // New start date
+                selectedStartDate = date;
+                selectedEndDate = null;
+            }
+            
+            updateCalendarDisplay();
+            
+            // Enable/disable confirm button
+            const confirmBtn = document.getElementById('confirmBtn');
+            confirmBtn.disabled = !(selectedStartDate && selectedEndDate);
+        }
+
+        function previousMonth() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            updateCalendarDisplay();
+        }
+
+        function nextMonth() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            updateCalendarDisplay();
+        }
+
+        function updateDateSummary() {
+            const summary = document.getElementById('dateSummary');
+            
+            if (selectedStartDate) {
+                summary.style.display = 'block';
+                document.getElementById('startDateDisplay').textContent = 
+                    selectedStartDate.toLocaleDateString('he-IL');
+                
+                if (selectedEndDate) {
+                    document.getElementById('endDateDisplay').textContent = 
+                        selectedEndDate.toLocaleDateString('he-IL');
+                    
+                    const days = Math.ceil((selectedEndDate - selectedStartDate) / (1000 * 60 * 60 * 24));
+                    document.getElementById('totalDaysDisplay').textContent = days;
+                } else {
+                    document.getElementById('endDateDisplay').textContent = 'לא נבחר';
+                    document.getElementById('totalDaysDisplay').textContent = '0';
+                }
+            } else {
+                summary.style.display = 'none';
+            }
+        }
+
+        function selectRentalType(type, price) {
+            currentRentalType = type;
+            currentPricePerDay = price;
+            
+            // Update visual selection
+            document.querySelectorAll('.rental-option').forEach(option => {
+                option.classList.remove('selected');
+                // Remove recommendation badges when user manually selects
+                const badge = option.querySelector('.recommendation-badge');
+                if (badge) badge.remove();
+            });
+            
+            event.target.closest('.rental-option').classList.add('selected');
+            
+            updatePriceSummary();
+        }
+
+        function selectPayment(method) {
+            selectedPayment = method;
+            
+            // Update visual selection
+            document.querySelectorAll('.payment-method').forEach(option => {
+                option.classList.remove('selected');
+            });
+            event.target.closest('.payment-method').classList.add('selected');
+            
+            // Show/hide credit card details
+            const creditCardDetails = document.getElementById('creditCardDetails');
+            creditCardDetails.style.display = method === 'credit' ? 'block' : 'none';
+        }
+
+        function updatePriceSummary() {
+            document.getElementById('pricePerDay').textContent = `₪${currentPricePerDay}`;
+            
+            if (selectedStartDate && selectedEndDate) {
+                let days;
+                if (selectedStartDate.getTime() === selectedEndDate.getTime()) {
+                    days = 1; // Single day
+                } else {
+                    days = Math.ceil((selectedEndDate - selectedStartDate) / (1000 * 60 * 60 * 24));
+                }
+                
+                document.getElementById('numberOfDays').textContent = days;
+                
+                const rentalCost = days * currentPricePerDay;
+                const deposit = 500;
+                const total = rentalCost + deposit;
+                
+                document.getElementById('totalAmount').textContent = `₪${total.toLocaleString()}`;
+            } else {
+                document.getElementById('numberOfDays').textContent = '0';
+                document.getElementById('totalAmount').textContent = '₪500';
+            }
+        }
+
+        function updateSubmitButton() {
+            const submitBtn = document.getElementById('submitBtn');
+            const isValid = selectedStartDate && selectedEndDate && 
+                           document.getElementById('firstName').value &&
+                           document.getElementById('lastName').value &&
+                           document.getElementById('phone').value &&
+                           document.getElementById('email').value;
+            
+            submitBtn.disabled = !isValid;
+        }
+
+        // Form validation
+        document.querySelectorAll('input[required]').forEach(input => {
+            input.addEventListener('input', updateSubmitButton);
+        });
+
+        // Form submission
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Here you would normally send the data to your server
+            alert('תודה על ההזמנה! נחזור אליך בהקדם לאישור הפרטים.');
+            
+            // Redirect back to main site
+            window.location.href = 'index.html';
+        });
+
+        // Initialize calendar on page load
+        initCalendar();
+    </script>
+</body>
+</html>
