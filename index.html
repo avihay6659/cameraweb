@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProCam Studio - המצלמה המקצועית שלך</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('background.jpg') center/cover no-repeat;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Camera Section */
+        .camera-section {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .camera-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .camera-image {
+            text-align: center;
+        }
+
+        .camera-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .camera-image img:hover {
+            transform: scale(1.05);
+        }
+
+        .camera-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .features-list li {
+            padding: 12px 0;
+            font-size: 1.1rem;
+            position: relative;
+            padding-right: 30px;
+        }
+
+        .features-list li:before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Info Tabs Section */
+        .info-tabs {
+            background: white;
+            padding: 0 0 60px 0;
+        }
+
+        .tabs-nav {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 8px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px 20px;
+            background: transparent;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 140px;
+        }
+
+        .tab-btn.active {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .info-content {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .info-content h3 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .info-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .info-content h4 {
+            color: #667eea;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        .info-content p {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .info-content ul {
+            margin-bottom: 25px;
+            padding-right: 25px;
+        }
+
+        .info-content li {
+            color: #555;
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+            list-style-type: disc;
+            list-style-position: inside;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .price-section {
+            margin-bottom: 40px;
+        }
+
+        .old-price {
+            font-size: 1.5rem;
+            color: #e74c3c;
+            text-decoration: line-through;
+            margin-left: 15px;
+        }
+
+        .new-price {
+            font-size: 2.5rem;
+            color: #27ae60;
+            font-weight: 700;
+        }
+
+        .currency {
+            font-size: 1.8rem;
+        }
+
+        .sale-badge {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-right: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Specifications Section */
+        .specs-section {
+            background: #f8f9fa;
+            padding: 60px 0;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .spec-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .spec-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .spec-card h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .spec-card ul {
+            list-style: none;
+        }
+
+        .spec-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .spec-card li:last-child {
+            border-bottom: none;
+        }
+
+        /* About Section */
+        .about-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .about-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .about-section p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Accessibility Button */
+        .accessibility-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .accessibility-btn:hover {
+            background: #2980b9;
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .camera-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .camera-info {
+                text-align: center;
+            }
+
+            .tabs-nav {
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+            
+            .tab-btn {
+                min-width: 120px;
+                font-size: 0.9rem;
+                padding: 12px 15px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .camera-section,
+            .info-tabs,
+            .about-section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .camera-info h2 {
+                font-size: 2rem;
+            }
+
+            .new-price {
+                font-size: 2rem;
+            }
+
+            .old-price {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>ProCam Studio</h1>
+                <p>המצלמה המקצועית החדשה שתשנה לך את חוויית הצילום לנצח. איכות בלתי מתפשרת, טכנולוgia מתקדמת ועיצוב מושלם</p>
+                <a href="#camera" class="cta-button">השכר עכשיו!</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Camera Section -->
+    <section id="camera" class="camera-section">
+        <div class="container">
+            <div class="camera-content">
+                <div class="camera-image">
+                    <img src="https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="מצלמה מקצועית" />
+                </div>
+                <div class="camera-info">
+                    <h2>Canon PowerShot G7X Mark III</h2>
+                    <ul class="features-list">
+                        <li>חיישן CMOS 1.0 אינץ' 20.1MP</li>
+                        <li>עדשה זום אופטי 4.2x (24-100mm)</li>
+                        <li>מסך מגע מתהפך 3.0 אינץ'</li>
+                        <li>צילום וידאו 4K UHD</li>
+                        <li>מייצב תמונה אופטי</li>
+                        <li>חיבור WiFi ו-Bluetooth</li>
+                        <li>שידור חי ליוטיוב</li>
+                        <li>מהירות צילום עד 30fps</li>
+                    </ul>
+                    
+                    <div class="price-section">
+                        <span class="sale-badge">מבצע מיוחד!</span>
+                        <span class="new-price">₪2,250</span>
+                        <span class="old-price">₪2,500</span>
+                    </div>
+                    
+                    <a href="#order" class="cta-button">הזמן עכשיו</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Tabs Section -->
+    <section class="info-tabs">
+        <div class="container">
+            <div class="tabs-nav">
+                <button class="tab-btn active" onclick="openTab(event, 'general-info')">מידע כללי</button>
+                <button class="tab-btn" onclick="openTab(event, 'specs')">מאפיינים טכניים</button>
+                <button class="tab-btn" onclick="openTab(event, 'accessories')">מוצרים נלווים</button>
+                <button class="tab-btn" onclick="openTab(event, 'availability')">זמינות</button>
+            </div>
+
+            <div id="general-info" class="tab-content active">
+                <div class="info-content">
+                    <h3>מידע כללי על Canon PowerShot G7X Mark III</h3>
+                    
+                    <p>Canon PowerShot G7X Mark III היא מצלמה קומפקטית מתקדמת המיועדת לצלמים חובבים ומקצועיים כאחד. המצלמה מציעה איכות תמונה מעולה תודות לחיישן CMOS גדול יחסית וטכנולוגיות מתקדמות של Canon.</p>
+                    
+                    <h4>יתרונות עיקריים</h4>
+                    <p>המצלמה מתאפיינת בגודל קומפקטי וקל למכס, איכות תמונה מעולה לקטגוריה שלה, יכולת שידור חי ליוטיוב, צילום וידאו באיכות 4K, ומסך מתהפך המאפשר צילום סלפי נוח.</p>
+                    
+                    <h4>מיועדת עבור</h4>
+                    <p>המצלמה מושלמת ליוצרי תוכן דיגיטלי, בלוגרים ווולוגרים, צלמי נסיעות וצלמי רחוב. היא מתאימה גם לצלמים חובבים מתקדמים המחפשים איכות גבוהה בגודל קומפקטי.</p>
+                </div>
+            </div>
+
+            <div id="specs" class="tab-content">
+                <div class="info-content">
+                    <h3>מאפיינים טכניים מפורטים</h3>
+                    
+                    <h4>חיישן ועדשה</h4>
+                    <p>המצלמה מצוידת בחיישן <span class="highlight">CMOS 1.0 אינץ' ברזולוציה של 20.1 מגה פיקסל</span>, המבטיח איכות תמונה מעולה גם בתאורה חלשה. העדשה היא זום אופטי פנימי ברזולוציה 24-100mm עם צמצם f/1.8-2.8, המאפשרת צילום מגוון רחב של נושאים.</p>
+                    
+                    <h4>ביצועים וצילום</h4>
+                    <p>המצלמה מציעה טווח ISO של 125-12800, מהירות צמצם מקסימלית של 1/2000 שנייה, וצילום רצף במהירות של עד 30 פריימים לשנייה. מערכת הפוקוס כוללת 31 נקודות פוקוס עם מהירות פוקוס של 0.12 שניות בלבד.</p>
+                    
+                    <h4>וידאו ומסך</h4>
+                    <p>המצלמה מסוגלת לצלם וידאו ברזולוציה 4K UHD במהירות 30 פריימים לשנייה. המסך הוא <span class="highlight">מסך מגע 3.0 אינץ' מתהפך</span> ברזולוציה של 1.04 מיליון נקודות, המאפשר צילום מזוויות שונות ושליטה נוחה במצלמה.</p>
+                    
+                    <h4>קישוריות וסוללה</h4>
+                    <p>המצלמה כוללת חיבור WiFi 802.11b/g/n ו-Bluetooth 4.2 לשיתוף תמונות מהיר. הטעינה וההעברה נעשות באמצעות יציאת USB-C. הסוללה מסוג NB-13L מאפשרת צילום של כ-265 תמונות לטעינה.</p>
+                </div>
+            </div>
+
+            <div id="accessories" class="tab-content">
+                <div class="info-content">
+                    <h3>מוצרים נלווים ואביזרים</h3>
+                    
+                    <h4>מה כלול בקופסה</h4>
+                    <p>עם רכישת המצלמה תקבלו את מצלמת Canon G7X Mark III, סוללה NB-13L, מטען סוללה CB-2LH, כבל USB מסוג USB-A ל-USB-C, רצועת יד איכותית ומדריך למשתמש מפורט.</p>
+                    
+                    <h4>אביזרים מומלצים</h4>
+                    <p>למקסום הפוטנציאל של המצלמה, אנו ממליצים על כרטיס זיכרון SanDisk 64GB לאחסון מהיר, תיק נשיאה מקורי של Canon להגנה מושלמת, סוללה נוספת NB-13L לימי צילום ארוכים, חצובה קלה לנסיעות ומסנן UV להגנה על העדשה.</p>
+                    
+                    <h4>אביזרים מתקדמים</h4>
+                    <p>עבור צרכים מתקדמים יותר, ניתן להוסיף מיקרופון חיצוני לשיפור איכות הקול בסרטונים, תאורת LED קטנה לצילום בתאורה חלשה, גריפ יד נוסף לאחיזה משופרת, מסנני צבע יצירתיים לאפקטים מיוחדים וכיסוי עמיד למים לצילום בתנאי מזג אוויר קשים.</p>
+                </div>
+            </div>
+
+            <div id="availability" class="tab-content">
+                <div class="info-content">
+                    <h3>זמינות ושירות</h3>
+                    
+                    <h4>זמינות במלאי</h4>
+                    <p>אנו שמחים להודיע שהמצלמה זמינה במלאי מלא עם יותר מ-50 יחידות במלאי ומוכנה למשלוח מיידי. אנו מבטיחים משלוח מהיר תוך 24-48 שעות לכל רחבי הארץ, וכמובן גם אפשרות לאיסוף עצמי מיידי מהחנות שלנו.</p>
+                    
+                    <h4>אחריות ושירות</h4>
+                    <p><span class="highlight">אחריות יצרן מלאה למשך 2 שנים</span> כוללת שירות טכני בעברית וללא עלות נוספת. יש לנו מרכזי שירות בכל רחבי הארץ, שירות החלפה זמנית במקרה של תקלה, וזכות החזרה מלאה למשך 14 יום ללא שאלות.</p>
+                    
+                    <h4>אפשרויות תשלום גמישות</h4>
+                    <p>אנו מציעים מגוון אפשרויות תשלום נוחות: תשלום מזומן או כרטיס אשראי, תשלומים נוחים עד 12 תשלומים ללא ריבית, ביט ופייבוקס, העברה בנקאית, וכמובן מימון 0% ללקוחות מאושרים שעומדים בקריטריונים.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2>אודות ProCam Studio</h2>
+            <p>אנחנו מובילים בתחום הצילום המקצועי כבר למעלה מ-15 שנה. המטרה שלנו היא להביא לכל צלם, מתחיל ומקצועי, את הכלים הטובים ביותר לביטוי יצירתי מושלם. המצלמות שלנו נבחרות בקפידה ועוברות בדיקות איכות מחמירות כדי להבטיח לכם חוויית צילום בלתי נשכחת.</p>
+        </div>
+    </section>
+
+    <!-- Accessibility Button -->
+    <button class="accessibility-btn" onclick="toggleAccessibility()" title="נגישות">
+        ♿
+    </button>
+
+    <script>
+        // Tabs functionality
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            
+            // Hide all tab content
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            
+            // Remove active class from all tab buttons
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            
+            // Show the selected tab and mark button as active
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Accessibility function
+        let accessibilityMode = false;
+        function toggleAccessibility() {
+            accessibilityMode = !accessibilityMode;
+            if (accessibilityMode) {
+                document.body.style.fontSize = '1.2em';
+                document.body.style.filter = 'contrast(1.2)';
+                alert('מצב נגישות הופעל - גופן גדול יותר וניגודיות משופרת');
+            } else {
+                document.body.style.fontSize = '';
+                document.body.style.filter = '';
+                alert('מצב נגישות בוטל - חזרה להגדרות רגילות');
+            }
+        }
+
+        // Add scroll animation effects
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply animation to spec cards
+        document.querySelectorAll('.spec-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
