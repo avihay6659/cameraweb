@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>רולטה אירופאית - Golden Casino Elite</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #FFD700;
+            --dark-gold: #B8860B;
+            --light-gold: #FFF8DC;
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #151515;
+            --bg-card: #1a1a1a;
+            --accent-blue: #00d4ff;
+            --accent-purple: #8b5cf6;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --success: #10b981;
+            --error: #ef4444;
+            --roulette-red: #dc2626;
+            --roulette-black: #1f2937;
+            --roulette-green: #059669;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            padding: 20px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary-gold);
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+            to { text-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+        }
+
+        .logo::before {
+            content: '🎯';
+            font-size: 40px;
+            animation: logoSpin 4s ease-in-out infinite;
+        }
+
+        @keyframes logoSpin {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(90deg) scale(1.1); }
+            50% { transform: rotate(180deg) scale(1); }
+            75% { transform: rotate(270deg) scale(1.1); }
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .balance-display {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 15px 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .balance-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+
+        .balance-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-gold);
+            font-family: 'Courier New', monospace;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 0;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-blue), var(--accent-purple));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { filter: brightness(1) drop-shadow(0 0 20px rgba(255, 215, 0, 0.3)); }
+            100% { filter: brightness(1.2) drop-shadow(0 0 40px rgba(255, 215, 0, 0.6)); }
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .game-layout {
+            display: grid;
+            grid-template-columns: 450px 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        /* Wheel Section */
+        .wheel-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .wheel-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .roulette-wheel {
+            width: 380px;
+            height: 380px;
+            border: 6px solid var(--primary-gold);
+            border-radius: 50%;
+            position: relative;
+            background: var(--bg-card);
+            box-shadow: 
+                0 0 60px rgba(255, 215, 0, 0.4),
+                inset 0 0 60px rgba(0, 0, 0, 0.6);
+            transition: transform 4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .wheel-numbers {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+        }
+
+        .wheel-number {
+            position: absolute;
+            width: 24px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: white;
+            border-radius: 3px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 30px solid var(--primary-gold);
+            z-index: 10;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+        }
+
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, var(--primary-gold), var(--dark-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 24px;
+            color: #000;
+            border: 3px solid #fff;
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.4),
+                inset 0 2px 10px rgba(255, 255, 255, 0.3);
+            z-index: 15;
+        }
+
+        /* Recent Numbers */
+        .recent-section {
+            background: linear-gradient(135deg, var(--bg-card), rgba(26, 26, 26, 0.8));
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .recent-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-gold);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .recent-numbers {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .recent-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+            color: white;
+            border: 2px solid var(--primary-gold);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Betting Table */
+        .betting-table {
+            background: linear-gradient(135deg, var(--bg-card), rgba(26, 26, 26, 0.9));
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .betting-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-blue));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Chip Selector */
+        .chip-selector {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            position: relative;
+        }
+
+        .chip.chip-10 { 
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+        }
+        .chip.chip-25 { 
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);
+        }
+        .chip.chip-50 { 
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+        }
+        .chip.chip-100 { 
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+        .chip.chip-500 { 
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        }
+        .chip.chip-1000 { 
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.5);
+        }
+
+        .chip:hover {
+            transform: scale(1.1);
+            border-color: var(--primary-gold);
+        }
+
+        .chip.selected {
+            border-color: var(--primary-gold);
+            transform: scale(1.15);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Main Betting Grid - Ultra Premium */
+        .betting-grid {
+            display: grid;
+            grid-template-columns: 60px repeat(12, 1fr) 80px;
+            gap: 4px;
+            background: linear-gradient(135deg, 
+                var(--roulette-green) 0%, 
+                #059669 30%, 
+                #10b981 70%, 
+                var(--roulette-green) 100%);
+            padding: 25px;
+            border-radius: 25px;
+            border: 4px solid transparent;
+            background-image: linear-gradient(135deg, 
+                var(--roulette-green), 
+                #059669, 
+                #10b981), 
+                linear-gradient(135deg, var(--primary-gold), var(--accent-blue), var(--primary-gold));
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.6),
+                inset 0 4px 20px rgba(255, 215, 0, 0.2),
+                0 0 100px rgba(255, 215, 0, 0.3);
+            position: relative;
+        }
+
+        .betting-grid::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-gold), var(--accent-blue), var(--accent-purple), var(--primary-gold));
+            border-radius: 25px;
+            z-index: -1;
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .bet-cell {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: all 0.4s ease;
+            border: 3px solid transparent;
+            position: relative;
+            min-height: 50px;
+            box-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.4),
+                inset 0 2px 8px rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .bet-cell::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%) rotate(45deg);
+            transition: transform 0.6s;
+        }
+
+        .bet-cell:hover::before {
+            transform: translateX(100%) rotate(45deg);
+        }
+
+        .bet-cell.zero {
+            background: linear-gradient(135deg, 
+                var(--roulette-green) 0%, 
+                #10b981 50%, 
+                #059669 100%);
+            color: white;
+            grid-row: span 3;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 22px;
+            text-shadow: 
+                0 3px 6px rgba(0, 0, 0, 0.9),
+                0 0 20px rgba(16, 185, 129, 0.6);
+            box-shadow: 
+                0 6px 20px rgba(5, 150, 105, 0.5),
+                inset 0 2px 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .bet-cell.red {
+            background: linear-gradient(135deg, 
+                var(--roulette-red) 0%, 
+                #ef4444 50%, 
+                #dc2626 100%);
+            color: white;
+            text-shadow: 
+                0 2px 6px rgba(0, 0, 0, 0.9),
+                0 0 15px rgba(239, 68, 68, 0.6);
+            box-shadow: 
+                0 4px 15px rgba(220, 38, 38, 0.4),
+                inset 0 2px 8px rgba(255, 255, 255, 0.15);
+        }
+
+        .bet-cell.black {
+            background: linear-gradient(135deg, 
+                var(--roulette-black) 0%, 
+                #374151 50%, 
+                #1f2937 100%);
+            color: white;
+            text-shadow: 
+                0 2px 6px rgba(0, 0, 0, 0.9),
+                0 0 15px rgba(55, 65, 81, 0.6);
+            box-shadow: 
+                0 4px 15px rgba(31, 41, 55, 0.4),
+                inset 0 2px 8px rgba(255, 255, 255, 0.1);
+        }
+
+        .bet-cell.column-bet {
+            background: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.4) 0%, 
+                rgba(255, 215, 0, 0.2) 50%, 
+                rgba(255, 215, 0, 0.1) 100%);
+            color: var(--primary-gold);
+            font-size: 14px;
+            font-weight: 800;
+            border: 2px solid rgba(255, 215, 0, 0.6);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .bet-cell:hover {
+            transform: scale(1.1) rotateY(5deg);
+            border-color: var(--primary-gold);
+            box-shadow: 
+                0 10px 30px rgba(255, 215, 0, 0.7),
+                inset 0 2px 12px rgba(255, 255, 255, 0.2);
+            z-index: 10;
+        }
+
+        .bet-cell.has-bet {
+            border-color: var(--primary-gold);
+            box-shadow: 
+                0 0 30px rgba(255, 215, 0, 0.9),
+                0 8px 25px rgba(255, 215, 0, 0.6),
+                inset 0 2px 12px rgba(255, 255, 255, 0.2);
+            animation: betPulse 2s ease-in-out infinite;
+            transform: scale(1.02);
+        }
+
+        @keyframes betPulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 30px rgba(255, 215, 0, 0.9),
+                    0 8px 25px rgba(255, 215, 0, 0.6),
+                    inset 0 2px 12px rgba(255, 255, 255, 0.2);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 40px rgba(255, 215, 0, 1),
+                    0 12px 35px rgba(255, 215, 0, 0.8),
+                    inset 0 2px 15px rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        .bet-chip-display {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, 
+                var(--primary-gold) 0%, 
+                #ffed4e 50%, 
+                var(--dark-gold) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 900;
+            color: #000;
+            border: 3px solid #fff;
+            box-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.6),
+                inset 0 2px 8px rgba(255, 255, 255, 0.3),
+                0 0 20px rgba(255, 215, 0, 0.8);
+            animation: chipGlow 2s ease-in-out infinite alternate;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        @keyframes chipGlow {
+            0% { 
+                transform: scale(1) rotate(0deg);
+                box-shadow: 
+                    0 4px 12px rgba(0, 0, 0, 0.6),
+                    inset 0 2px 8px rgba(255, 255, 255, 0.3),
+                    0 0 20px rgba(255, 215, 0, 0.8);
+            }
+            100% { 
+                transform: scale(1.1) rotate(5deg);
+                box-shadow: 
+                    0 6px 16px rgba(0, 0, 0, 0.8),
+                    inset 0 2px 10px rgba(255, 255, 255, 0.4),
+                    0 0 30px rgba(255, 215, 0, 1);
+            }
+        }
+
+        /* Outside Bets - Ultra Premium */
+        .outside-bets {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .outside-bet {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.2) 0%, 
+                rgba(255, 255, 255, 0.1) 50%, 
+                rgba(255, 255, 255, 0.05) 100%);
+            border: 3px solid transparent;
+            background-image: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.2), 
+                rgba(255, 255, 255, 0.1), 
+                rgba(255, 255, 255, 0.05)), 
+                linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 215, 0, 0.3));
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            border-radius: 18px;
+            padding: 20px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-weight: 800;
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 8px 20px rgba(0, 0, 0, 0.4),
+                inset 0 2px 10px rgba(255, 255, 255, 0.1);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .outside-bet::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .outside-bet:hover::before {
+            left: 100%;
+        }
+
+        .outside-bet:hover {
+            background-image: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.3), 
+                rgba(255, 215, 0, 0.2), 
+                rgba(255, 215, 0, 0.1)), 
+                linear-gradient(135deg, var(--primary-gold), var(--accent-blue));
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 
+                0 15px 35px rgba(255, 215, 0, 0.5),
+                inset 0 2px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .outside-bet.has-bet {
+            background-image: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.4), 
+                rgba(255, 215, 0, 0.3), 
+                rgba(255, 215, 0, 0.2)), 
+                linear-gradient(135deg, var(--primary-gold), var(--accent-blue));
+            box-shadow: 
+                0 0 35px rgba(255, 215, 0, 0.8),
+                0 10px 30px rgba(255, 215, 0, 0.6),
+                inset 0 2px 15px rgba(255, 255, 255, 0.3);
+            animation: betPulse 2s ease-in-out infinite;
+            transform: scale(1.02);
+        }
+
+        /* Dozens and Columns - Ultra Premium */
+        .dozens-columns {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .dozen-bet, .column-bet {
+            background: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.25) 0%, 
+                rgba(255, 215, 0, 0.15) 50%, 
+                rgba(255, 215, 0, 0.1) 100%);
+            border: 3px solid transparent;
+            background-image: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.25), 
+                rgba(255, 215, 0, 0.15), 
+                rgba(255, 215, 0, 0.1)), 
+                linear-gradient(135deg, var(--primary-gold), var(--accent-blue), var(--accent-purple));
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            border-radius: 18px;
+            padding: 20px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-weight: 800;
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 8px 20px rgba(255, 215, 0, 0.3),
+                inset 0 2px 10px rgba(255, 215, 0, 0.2);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+            color: var(--primary-gold);
+        }
+
+        .dozen-bet::before, .column-bet::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .dozen-bet:hover::before, .column-bet:hover::before {
+            left: 100%;
+        }
+
+        .dozen-bet:hover, .column-bet:hover {
+            background-image: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.4), 
+                rgba(255, 215, 0, 0.3), 
+                rgba(255, 215, 0, 0.2)), 
+                linear-gradient(135deg, var(--primary-gold), var(--accent-blue), var(--accent-purple));
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 
+                0 15px 35px rgba(255, 215, 0, 0.6),
+                inset 0 2px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .dozen-bet.has-bet, .column-bet.has-bet {
+            background-image: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.5), 
+                rgba(255, 215, 0, 0.4), 
+                rgba(255, 215, 0, 0.3)), 
+                linear-gradient(135deg, var(--primary-gold), var(--accent-blue), var(--accent-purple));
+            box-shadow: 
+                0 0 35px rgba(255, 215, 0, 0.9),
+                0 10px 30px rgba(255, 215, 0, 0.7),
+                inset 0 2px 15px rgba(255, 215, 0, 0.4);
+            animation: betPulse 2s ease-in-out infinite;
+            transform: scale(1.02);
+        }: left 0.5s;
+        }
+
+        .outside-bet:hover::before {
+            left: 100%;
+        }
+
+        .outside-bet:hover {
+            border-color: var(--primary-gold);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        .outside-bet.has-bet {
+            border-color: var(--primary-gold);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 215, 0, 0.15));
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+            animation: betPulse 2s ease-in-out infinite;
+        }
+
+        /* Dozens and Columns - Enhanced */
+        .dozens-columns {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .dozen-bet, .column-bet {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            border-radius: 15px;
+            padding: 18px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            font-size: 13px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+        }
+
+        .dozen-bet::before, .column-bet::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .dozen-bet:hover::before, .column-bet:hover::before {
+            left: 100%;
+        }
+
+        .dozen-bet:hover, .column-bet:hover {
+            border-color: var(--primary-gold);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(255, 215, 0, 0.1));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+        }
+
+        .dozen-bet.has-bet, .column-bet.has-bet {
+            border-color: var(--primary-gold);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.4), rgba(255, 215, 0, 0.2));
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+            animation: betPulse 2s ease-in-out infinite;
+        }
+
+        /* Game Info - Ultra Premium */
+        .game-info {
+            background: linear-gradient(135deg, 
+                rgba(0, 0, 0, 0.8) 0%, 
+                rgba(26, 26, 26, 0.9) 50%, 
+                rgba(0, 0, 0, 0.8) 100%);
+            border: 3px solid transparent;
+            background-image: linear-gradient(135deg, 
+                rgba(0, 0, 0, 0.8), 
+                rgba(26, 26, 26, 0.9), 
+                rgba(0, 0, 0, 0.8)), 
+                linear-gradient(135deg, var(--primary-gold), var(--accent-blue), var(--accent-purple));
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(20px);
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.5),
+                inset 0 2px 15px rgba(255, 215, 0, 0.1);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .info-item {
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.1) 0%, 
+                rgba(255, 215, 0, 0.05) 100%);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: scale(1.02);
+            background: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.15) 0%, 
+                rgba(255, 215, 0, 0.08) 100%);
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-size: 18px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-blue));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Control Buttons - Ultra Premium */
+        .control-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn-spin {
+            padding: 20px 50px;
+            font-size: 20px;
+            font-weight: 900;
+            background: linear-gradient(135deg, 
+                var(--primary-gold) 0%, 
+                #ffed4e 25%, 
+                var(--dark-gold) 75%, 
+                var(--primary-gold) 100%);
+            color: #000;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 
+                0 10px 30px rgba(255, 215, 0, 0.5),
+                inset 0 2px 15px rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-spin::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transition: left 0.8s;
+        }
+
+        .btn-spin:hover::before {
+            left: 100%;
+        }
+
+        .btn-spin:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 
+                0 20px 50px rgba(255, 215, 0, 0.7),
+                inset 0 2px 20px rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-spin:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+            animation: spinningButton 1s linear infinite;
+        }
+
+        @keyframes spinningButton {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .btn-clear {
+            padding: 20px 35px;
+            font-size: 16px;
+            font-weight: 700;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.15) 0%, 
+                rgba(255, 255, 255, 0.1) 50%, 
+                rgba(255, 255, 255, 0.05) 100%);
+            color: var(--text-primary);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-clear:hover {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.25) 0%, 
+                rgba(255, 255, 255, 0.15) 50%, 
+                rgba(255, 255, 255, 0.1) 100%);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Win Animation */
+        .win-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .win-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .win-content {
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-card), rgba(26, 26, 26, 0.9));
+            border: 3px solid var(--primary-gold);
+            border-radius: 25px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            animation: winPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes winPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .win-title {
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-blue));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .win-amount {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary-gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .game-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .betting-grid {
+                grid-template-columns: 30px repeat(12, 1fr) 50px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .roulette-wheel {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .betting-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+            
+            .outside-bets, .dozens-columns {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .chip {
+                width: 50px;
+                height: 50px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">רולטה אירופאית מקצועית</div>
+            <div class="user-section">
+                <div class="balance-display">
+                    <div class="balance-label">יתרת החשבון</div>
+                    <div class="balance-amount">₪<span id="balance">25,000</span></div>
+                </div>
+                <button class="btn btn-secondary" onclick="window.location.href='index.html'">
+                    🏠 חזור לקזינו הראשי
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="hero-section">
+            <h1 class="hero-title">רולטה אירופאית מקצועית</h1>
+            <p class="hero-subtitle">חוויית קזינו אמיתית עם כל סוגי ההימורים</p>
+        </section>
+
+        <div class="game-layout">
+            <!-- Wheel Section -->
+            <div class="wheel-section">
+                <div class="wheel-container">
+                    <div class="wheel-pointer"></div>
+                    <div class="roulette-wheel" id="roulette-wheel">
+                        <div class="wheel-numbers" id="wheel-numbers">
+                            <!-- Numbers will be generated here -->
+                        </div>
+                        <div class="wheel-center" id="winning-number">0</div>
+                    </div>
+                </div>
+
+                <div class="recent-section">
+                    <h3 class="recent-title">🎯 מספרים אחרונים</h3>
+                    <div class="recent-numbers" id="recent-numbers">
+                        <div style="color: var(--text-secondary); font-size: 12px;">אין מספרים עדיין</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Betting Table -->
+            <div class="betting-table">
+                <h2 class="betting-title">🎰 שולחן הימורים מקצועי</h2>
+
+                <!-- Chip Selector -->
+                <div class="chip-selector">
+                    <div class="chip chip-10 selected" data-value="10" onclick="selectChip(10)">₪10</div>
+                    <div class="chip chip-25" data-value="25" onclick="selectChip(25)">₪25</div>
+                    <div class="chip chip-50" data-value="50" onclick="selectChip(50)">₪50</div>
+                    <div class="chip chip-100" data-value="100" onclick="selectChip(100)">₪100</div>
+                    <div class="chip chip-500" data-value="500" onclick="selectChip(500)">₪500</div>
+                    <div class="chip chip-1000" data-value="1000" onclick="selectChip(1000)">₪1K</div>
+                </div>
+
+                <!-- Quick Bet Input -->
+                <div class="quick-bet-section">
+                    <h4 style="color: var(--primary-gold); margin-bottom: 15px; text-align: center;">⚡ הימור מהיר על מספר</h4>
+                    <div class="quick-bet-input">
+                        <input type="number" 
+                               class="number-input" 
+                               id="quick-number" 
+                               placeholder="הכנס מספר (0-36)" 
+                               min="0" 
+                               max="36">
+                        <button class="btn-quick-bet" onclick="quickBetOnNumber()">
+                            🎯 הימור מהיר
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Main Numbers Grid -->
+                <div class="betting-grid" id="betting-grid">
+                    <!-- Grid will be generated by JavaScript -->
+                </div>
+
+                <!-- Outside Bets -->
+                <div class="outside-bets">
+                    <div class="outside-bet" data-bet="red" onclick="placeOutsideBet('red')">
+                        🔴 אדום<br><small>1:1</small>
+                    </div>
+                    <div class="outside-bet" data-bet="black" onclick="placeOutsideBet('black')">
+                        ⚫ שחור<br><small>1:1</small>
+                    </div>
+                    <div class="outside-bet" data-bet="even" onclick="placeOutsideBet('even')">
+                        זוגי<br><small>1:1</small>
+                    </div>
+                    <div class="outside-bet" data-bet="odd" onclick="placeOutsideBet('odd')">
+                        אי-זוגי<br><small>1:1</small>
+                    </div>
+                    <div class="outside-bet" data-bet="low" onclick="placeOutsideBet('low')">
+                        1-18<br><small>1:1</small>
+                    </div>
+                    <div class="outside-bet" data-bet="high" onclick="placeOutsideBet('high')">
+                        19-36<br><small>1:1</small>
+                    </div>
+                </div>
+
+                <!-- Dozens and Columns -->
+                <div class="dozens-columns">
+                    <div class="dozen-bet" data-bet="dozen1" onclick="placeDozenBet('dozen1')">
+                        תריסר 1<br><small>1-12 (2:1)</small>
+                    </div>
+                    <div class="dozen-bet" data-bet="dozen2" onclick="placeDozenBet('dozen2')">
+                        תריסר 2<br><small>13-24 (2:1)</small>
+                    </div>
+                    <div class="dozen-bet" data-bet="dozen3" onclick="placeDozenBet('dozen3')">
+                        תריסר 3<br><small>25-36 (2:1)</small>
+                    </div>
+                    <div class="column-bet" data-bet="column1" onclick="placeColumnBet('column1')">
+                        עמודה 1<br><small>2:1</small>
+                    </div>
+                    <div class="column-bet" data-bet="column2" onclick="placeColumnBet('column2')">
+                        עמודה 2<br><small>2:1</small>
+                    </div>
+                    <div class="column-bet" data-bet="column3" onclick="placeColumnBet('column3')">
+                        עמודה 3<br><small>2:1</small>
+                    </div>
+                </div>
+
+                <!-- Game Info -->
+                <div class="game-info">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">ציפ נבחר</div>
+                            <div class="info-value" id="selected-chip-display">₪10</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">הימור כולל</div>
+                            <div class="info-value" id="total-bet-display">₪0</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">זכייה פוטנציאלית</div>
+                            <div class="info-value" id="potential-win-display">₪0</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">מספר זוכה אחרון</div>
+                            <div class="info-value" id="last-winner">-</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Control Buttons -->
+                <div class="control-buttons">
+                    <button class="btn-spin" id="spin-btn" onclick="spinWheel()">
+                        🎯 סובב גלגל
+                    </button>
+                    <button class="btn-clear" onclick="clearAllBets()">
+                        🗑️ נקה הימורים
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Win Overlay -->
+    <div class="win-overlay" id="win-overlay">
+        <div class="win-content">
+            <div class="win-title">🎉 מזל טוב!</div>
+            <div class="win-amount" id="win-amount">₪0</div>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        let currentBalance = 25000;
+        let selectedChipValue = 10;
+        let numberBets = new Map();
+        let outsideBets = new Map();
+        let dozenBets = new Map();
+        let columnBets = new Map();
+        let isSpinning = false;
+        let recentNumbers = [];
+
+        // Roulette configuration
+        const redNumbers = [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36];
+        const rouletteOrder = [0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26];
+
+        // Initialize game
+        document.addEventListener('DOMContentLoaded', function() {
+            createWheelNumbers();
+            createBettingGrid();
+            updateDisplay();
+        });
+
+        // Create wheel numbers and sectors like real roulette
+        function createWheelNumbers() {
+            const wheelNumbers = document.getElementById('wheel-numbers');
+            wheelNumbers.innerHTML = '';
+
+            // Create dividers container
+            const dividersContainer = document.createElement('div');
+            dividersContainer.className = 'wheel-dividers';
+            wheelNumbers.parentNode.insertBefore(dividersContainer, wheelNumbers);
+
+            // Create sectors container
+            const sectorsContainer = document.createElement('div');
+            sectorsContainer.className = 'wheel-sectors';
+            wheelNumbers.parentNode.insertBefore(sectorsContainer, wheelNumbers);
+
+            const totalSectors = rouletteOrder.length;
+            const sectorAngle = 360 / totalSectors;
+
+            rouletteOrder.forEach((number, index) => {
+                // Create sector background
+                const sector = document.createElement('div');
+                sector.className = 'wheel-sector';
+                
+                const rotation = index * sectorAngle;
+                sector.style.transform = `rotate(${rotation}deg)`;
+                
+                if (number === 0) {
+                    sector.style.setProperty('--sector-color', 'var(--roulette-green)');
+                    sector.style.background = `conic-gradient(from ${rotation}deg, var(--roulette-green) 0deg, var(--roulette-green) ${sectorAngle}deg, transparent ${sectorAngle}deg)`;
+                } else if (redNumbers.includes(number)) {
+                    sector.style.setProperty('--sector-color', 'var(--roulette-red)');
+                    sector.style.background = `conic-gradient(from ${rotation}deg, var(--roulette-red) 0deg, var(--roulette-red) ${sectorAngle}deg, transparent ${sectorAngle}deg)`;
+                } else {
+                    sector.style.setProperty('--sector-color', 'var(--roulette-black)');
+                    sector.style.background = `conic-gradient(from ${rotation}deg, var(--roulette-black) 0deg, var(--roulette-black) ${sectorAngle}deg, transparent ${sectorAngle}deg)`;
+                }
+                
+                sectorsContainer.appendChild(sector);
+
+                // Create divider
+                const divider = document.createElement('div');
+                divider.className = 'wheel-divider';
+                divider.style.transform = `rotate(${rotation}deg)`;
+                dividersContainer.appendChild(divider);
+
+                // Create number element
+                const numberEl = document.createElement('div');
+                numberEl.className = 'wheel-number';
+                numberEl.textContent = number;
+                
+                if (number === 0) {
+                    numberEl.style.background = 'linear-gradient(135deg, #059669, #10b981)';
+                    numberEl.style.borderColor = 'rgba(5, 150, 105, 0.8)';
+                } else if (redNumbers.includes(number)) {
+                    numberEl.style.background = 'linear-gradient(135deg, #dc2626, #ef4444)';
+                    numberEl.style.borderColor = 'rgba(220, 38, 38, 0.8)';
+                } else {
+                    numberEl.style.background = 'linear-gradient(135deg, #1f2937, #374151)';
+                    numberEl.style.borderColor = 'rgba(55, 65, 81, 0.8)';
+                }
+                
+                // Calculate position on circle - closer to edge for realistic look
+                const angle = (index * 360) / rouletteOrder.length;
+                const angleRad = ((angle - 90) * Math.PI) / 180; // -90 to start from top
+                const radius = 150; // Distance from center - closer to edge
+                
+                const x = Math.cos(angleRad) * radius;
+                const y = Math.sin(angleRad) * radius;
+                
+                numberEl.style.left = `calc(50% + ${x}px - 16px)`;
+                numberEl.style.top = `calc(50% + ${y}px - 12px)`;
+                
+                wheelNumbers.appendChild(numberEl);
+            });
+        }
+
+        // Create betting grid
+        function createBettingGrid() {
+            const grid = document.getElementById('betting-grid');
+            grid.innerHTML = '';
+
+            // Add zero
+            const zeroCell = document.createElement('div');
+            zeroCell.className = 'bet-cell zero';
+            zeroCell.textContent = '0';
+            zeroCell.onclick = () => placeNumberBet(0);
+            zeroCell.id = 'cell-0';
+            grid.appendChild(zeroCell);
+
+            // Add numbers 1-36 in casino layout
+            const layout = [
+                [3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36],
+                [2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35],
+                [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34]
+            ];
+
+            layout.forEach((row, rowIndex) => {
+                row.forEach(number => {
+                    const cell = document.createElement('div');
+                    cell.className = `bet-cell ${redNumbers.includes(number) ? 'red' : 'black'}`;
+                    cell.textContent = number;
+                    cell.onclick = () => placeNumberBet(number);
+                    cell.id = `cell-${number}`;
+                    grid.appendChild(cell);
+                });
+
+                // Add column bet
+                const columnCell = document.createElement('div');
+                columnCell.className = 'bet-cell column-bet';
+                columnCell.textContent = '2:1';
+                columnCell.onclick = () => placeColumnBet(`column${3-rowIndex}`);
+                columnCell.id = `column-${3-rowIndex}`;
+                grid.appendChild(columnCell);
+            });
+        }
+
+        // Select chip
+        function selectChip(value) {
+            selectedChipValue = value;
+            document.querySelectorAll('.chip').forEach(chip => {
+                chip.classList.remove('selected');
+            });
+            document.querySelector(`[data-value="${value}"]`).classList.add('selected');
+            updateDisplay();
+        }
+
+        // Place number bet
+        function placeNumberBet(number) {
+            if (isSpinning) return;
+            
+            if (selectedChipValue > currentBalance) {
+                showNotification('❌ אין מספיק כסף בחשבון!');
+                return;
+            }
+
+            const currentBet = numberBets.get(number) || 0;
+            const newBet = currentBet + selectedChipValue;
+            
+            if (newBet > 5000) {
+                showNotification('❌ הימור מקסימלי על מספר: ₪5,000');
+                return;
+            }
+
+            numberBets.set(number, newBet);
+            updateNumberDisplay(number);
+            updateDisplay();
+        }
+
+        // Place outside bet
+        function placeOutsideBet(betType) {
+            if (isSpinning) return;
+            
+            if (selectedChipValue > currentBalance) {
+                showNotification('❌ אין מספיק כסף בחשבון!');
+                return;
+            }
+
+            const currentBet = outsideBets.get(betType) || 0;
+            const newBet = currentBet + selectedChipValue;
+
+            outsideBets.set(betType, newBet);
+            updateBetDisplay(`.outside-bet[data-bet="${betType}"]`);
+            updateDisplay();
+        }
+
+        // Place dozen bet
+        function placeDozenBet(betType) {
+            if (isSpinning) return;
+            
+            if (selectedChipValue > currentBalance) {
+                showNotification('❌ אין מספיק כסף בחשבון!');
+                return;
+            }
+
+            const currentBet = dozenBets.get(betType) || 0;
+            const newBet = currentBet + selectedChipValue;
+
+            dozenBets.set(betType, newBet);
+            updateBetDisplay(`.dozen-bet[data-bet="${betType}"]`);
+            updateDisplay();
+        }
+
+        // Place column bet
+        function placeColumnBet(betType) {
+            if (isSpinning) return;
+            
+            if (selectedChipValue > currentBalance) {
+                showNotification('❌ אין מספיק כסף בחשבון!');
+                return;
+            }
+
+            const currentBet = columnBets.get(betType) || 0;
+            const newBet = currentBet + selectedChipValue;
+
+            columnBets.set(betType, newBet);
+            updateBetDisplay(`.column-bet[data-bet="${betType}"]`);
+            updateDisplay();
+        }
+
+        // Update number display
+        function updateNumberDisplay(number) {
+            const cell = document.getElementById(`cell-${number}`);
+            const bet = numberBets.get(number);
+            
+            let chipDisplay = cell.querySelector('.bet-chip-display');
+            if (bet > 0) {
+                if (!chipDisplay) {
+                    chipDisplay = document.createElement('div');
+                    chipDisplay.className = 'bet-chip-display';
+                    cell.appendChild(chipDisplay);
+                }
+                chipDisplay.textContent = bet >= 1000 ? `${Math.floor(bet/1000)}K` : bet;
+                cell.classList.add('has-bet');
+            } else {
+                if (chipDisplay) chipDisplay.remove();
+                cell.classList.remove('has-bet');
+            }
+        }
+
+        // Update bet display
+        function updateBetDisplay(selector) {
+            const betEl = document.querySelector(selector);
+            if (betEl) {
+                betEl.classList.add('has-bet');
+            }
+        }
+
+        // Calculate totals
+        function calculateTotals() {
+            let totalBet = 0;
+            let potentialWin = 0;
+
+            // Number bets (35:1)
+            for (let [number, bet] of numberBets) {
+                totalBet += bet;
+                potentialWin += bet * 35;
+            }
+
+            // Outside bets (1:1)
+            for (let [betType, bet] of outsideBets) {
+                totalBet += bet;
+                potentialWin += bet;
+            }
+
+            // Dozen bets (2:1)
+            for (let [betType, bet] of dozenBets) {
+                totalBet += bet;
+                potentialWin += bet * 2;
+            }
+
+            // Column bets (2:1)
+            for (let [betType, bet] of columnBets) {
+                totalBet += bet;
+                potentialWin += bet * 2;
+            }
+
+            return { totalBet, potentialWin };
+        }
+
+        // Update display
+        function updateDisplay() {
+            const { totalBet, potentialWin } = calculateTotals();
+            
+            document.getElementById('balance').textContent = currentBalance.toLocaleString();
+            document.getElementById('selected-chip-display').textContent = `₪${selectedChipValue}`;
+            document.getElementById('total-bet-display').textContent = `₪${totalBet.toLocaleString()}`;
+            document.getElementById('potential-win-display').textContent = `₪${potentialWin.toLocaleString()}`;
+        }
+
+        // Spin wheel
+        function spinWheel() {
+            if (isSpinning) return;
+
+            const { totalBet } = calculateTotals();
+            if (totalBet === 0) {
+                showNotification('❌ בחר הימור תחילה!');
+                return;
+            }
+
+            if (totalBet > currentBalance) {
+                showNotification('❌ אין מספיק כסף בחשבון!');
+                return;
+            }
+
+            isSpinning = true;
+            document.getElementById('spin-btn').disabled = true;
+            document.getElementById('spin-btn').textContent = '🎯 מסתובב...';
+
+            // Deduct bet from balance
+            currentBalance -= totalBet;
+
+            // Generate winning number
+            const winningNumber = Math.floor(Math.random() * 37);
+            
+            // Add to recent numbers
+            addRecentNumber(winningNumber);
+
+            // Spin animation
+            const wheel = document.getElementById('roulette-wheel');
+            const spins = 8 + Math.random() * 4;
+            const winningIndex = rouletteOrder.indexOf(winningNumber);
+            const finalRotation = spins * 360 + (winningIndex * 360 / rouletteOrder.length);
+            
+            wheel.style.transform = `rotate(${finalRotation}deg)`;
+
+            setTimeout(() => {
+                // Show winning number
+                document.getElementById('winning-number').textContent = winningNumber;
+                document.getElementById('last-winner').textContent = winningNumber;
+
+                // Calculate winnings
+                let totalWin = calculateWinnings(winningNumber);
+
+                // Update balance
+                currentBalance += totalWin;
+
+                if (totalWin > 0) {
+                    showWinOverlay(totalWin);
+                } else {
+                    showNotification(`😞 המספר הזוכה: ${winningNumber}. בהצלחה בפעם הבאה!`);
+                }
+
+                updateDisplay();
+                clearAllBets();
+
+                // Reset spin button
+                setTimeout(() => {
+                    isSpinning = false;
+                    document.getElementById('spin-btn').disabled = false;
+                    document.getElementById('spin-btn').textContent = '🎯 סובב גלגל';
+                }, 1000);
+
+            }, 4000);
+        }
+
+        // Calculate winnings
+        function calculateWinnings(winningNumber) {
+            let totalWin = 0;
+            const isRed = redNumbers.includes(winningNumber);
+            const isBlack = winningNumber > 0 && !isRed;
+            const isEven = winningNumber > 0 && winningNumber % 2 === 0;
+            const isOdd = winningNumber > 0 && winningNumber % 2 === 1;
+            const isLow = winningNumber >= 1 && winningNumber <= 18;
+            const isHigh = winningNumber >= 19 && winningNumber <= 36;
+
+            // Check number bets
+            if (numberBets.has(winningNumber)) {
+                totalWin += numberBets.get(winningNumber) * 36;
+            }
+
+            // Check outside bets
+            const outsideWins = {
+                red: isRed,
+                black: isBlack,
+                even: isEven,
+                odd: isOdd,
+                low: isLow,
+                high: isHigh
+            };
+
+            for (let [betType, bet] of outsideBets) {
+                if (outsideWins[betType]) {
+                    totalWin += bet * 2;
+                }
+            }
+
+            // Check dozen bets
+            const dozenWins = {
+                dozen1: winningNumber >= 1 && winningNumber <= 12,
+                dozen2: winningNumber >= 13 && winningNumber <= 24,
+                dozen3: winningNumber >= 25 && winningNumber <= 36
+            };
+
+            for (let [betType, bet] of dozenBets) {
+                if (dozenWins[betType]) {
+                    totalWin += bet * 3;
+                }
+            }
+
+            // Check column bets
+            const columnWins = {
+                column1: [1,4,7,10,13,16,19,22,25,28,31,34].includes(winningNumber),
+                column2: [2,5,8,11,14,17,20,23,26,29,32,35].includes(winningNumber),
+                column3: [3,6,9,12,15,18,21,24,27,30,33,36].includes(winningNumber)
+            };
+
+            for (let [betType, bet] of columnBets) {
+                if (columnWins[betType]) {
+                    totalWin += bet * 3;
+                }
+            }
+
+            return totalWin;
+        }
+
+        // Add recent number
+        function addRecentNumber(number) {
+            const color = number === 0 ? 'var(--roulette-green)' : 
+                         (redNumbers.includes(number) ? 'var(--roulette-red)' : 'var(--roulette-black)');
+            recentNumbers.unshift({ number, color });
+            if (recentNumbers.length > 12) {
+                recentNumbers.pop();
+            }
+            updateRecentNumbers();
+        }
+
+        // Update recent numbers display
+        function updateRecentNumbers() {
+            const container = document.getElementById('recent-numbers');
+            container.innerHTML = '';
+            
+            if (recentNumbers.length === 0) {
+                container.innerHTML = '<div style="color: var(--text-secondary); font-size: 12px;">אין מספרים עדיין</div>';
+                return;
+            }
+            
+            recentNumbers.forEach(item => {
+                const numberEl = document.createElement('div');
+                numberEl.className = 'recent-number';
+                numberEl.textContent = item.number;
+                numberEl.style.background = item.color;
+                container.appendChild(numberEl);
+            });
+        }
+
+        // Clear all bets
+        function clearAllBets() {
+            numberBets.clear();
+            outsideBets.clear();
+            dozenBets.clear();
+            columnBets.clear();
+            
+            document.querySelectorAll('.bet-cell').forEach(cell => {
+                cell.classList.remove('has-bet');
+                const chip = cell.querySelector('.bet-chip-display');
+                if (chip) chip.remove();
+            });
+            
+            document.querySelectorAll('.outside-bet, .dozen-bet, .column-bet').forEach(bet => {
+                bet.classList.remove('has-bet');
+            });
+            
+            updateDisplay();
+        }
+
+        // Show win overlay
+        function showWinOverlay(amount) {
+            const overlay = document.getElementById('win-overlay');
+            document.getElementById('win-amount').textContent = `+₪${amount.toLocaleString()}`;
+            overlay.classList.add('show');
+            
+            setTimeout(() => {
+                overlay.classList.remove('show');
+            }, 3000);
+        }
+
+        // Show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 30px;
+                background: rgba(0, 0, 0, 0.9);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 15px;
+                border: 1px solid var(--primary-gold);
+                z-index: 6000;
+                font-weight: 600;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-in forwards';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            @keyframes quickBetHighlight {
+                0% { 
+                    transform: scale(1); 
+                    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); 
+                }
+                50% { 
+                    transform: scale(1.15); 
+                    box-shadow: 0 0 40px rgba(0, 212, 255, 1); 
+                }
+                100% { 
+                    transform: scale(1); 
+                    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); 
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
